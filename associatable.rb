@@ -1,4 +1,5 @@
 require 'active_support/inflector'
+require_relative 'db_connection'
 
 class AssocOptions
   attr_accessor(
