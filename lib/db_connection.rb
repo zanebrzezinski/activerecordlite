@@ -1,5 +1,8 @@
-require 'sqlite3'
-require 'db_info'
+require 'byebug'
+require_relative 'associatable'
+require_relative 'searchable'
+require 'active_support/inflector'
+require_relative 'db_connection'
 
 PRINT_QUERIES = ENV['PRINT_QUERIES'] == 'true'
 SQL_FILE = DB_INFO[:SQL_FILE]
