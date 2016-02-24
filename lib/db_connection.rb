@@ -2,7 +2,9 @@ require 'byebug'
 require_relative 'associatable'
 require_relative 'searchable'
 require 'active_support/inflector'
-require_relative 'db_connection'
+require_relative 'db_info'
+require 'sqlite3'
+
 
 PRINT_QUERIES = ENV['PRINT_QUERIES'] == 'true'
 SQL_FILE = DB_INFO[:SQL_FILE]
@@ -49,13 +51,13 @@ class DBConnection
   private
 
   def self.print_query(query, *interpolation_args)
-    return unless PRINT_QUERIES
-
-    puts '--------------------'
-    puts query
-    unless interpolation_args.empty?
-      puts "interpolate: #{interpolation_args.inspect}"
-    end
-    puts '--------------------'
+    # return unless PRINT_QUERIES
+    #
+    # puts '--------------------'
+    # puts query
+    # unless interpolation_args.empty?
+    #   puts "interpolate: #{interpolation_args.inspect}"
+    # end
+    # puts '--------------------'
   end
 end
