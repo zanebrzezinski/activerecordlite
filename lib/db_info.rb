@@ -6,6 +6,6 @@
 ROOT_FOLDER = File.join(File.dirname(__FILE__), '..')
 
 DB_INFO = {
-  SQL_FILE: File.join(ROOT_FOLDER, 'cats.sql'), #insert SQL_FILE here
-  DB_FILE: File.join(ROOT_FOLDER, 'cats.db') #insert DB_FILE here
+  SQL_FILE: File.join(ROOT_FOLDER, 'players.sql'), #insert SQL_FILE here
+  DB_FILE: File.join(ROOT_FOLDER, 'players.db') #insert DB_FILE here
 }
