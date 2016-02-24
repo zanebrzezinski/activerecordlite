@@ -23,14 +23,14 @@ CREATE TABLE teams (
 INSERT INTO
   teams (id, name)
 VALUES
-  (1, "Mets"), (2, "Yankees");
+  (1, "Mets"), (2, "Yankees"), (3, "Nationals");
 
 INSERT INTO
   managers (id, fname, lname, team_id)
 VALUES
   (1, "Terry", "Collins", 1),
-  (2, "Joe", "Girardi", 1),
-  (3, "Dusty", "Baker", 2),
+  (2, "Joe", "Girardi", 2),
+  (3, "Dusty", "Baker", 3),
   (4, "Fredi", "Gonzalez", NULL),
   (5, "Dan", "Warthen", 1);
 

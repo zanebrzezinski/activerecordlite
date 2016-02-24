@@ -156,7 +156,7 @@ describe SQLObject do
         expect(players.length).to eq(2)
         hashes.each_index do |i|
           expect(players[i].name).to eq(hashes[i][:name])
-          expect(players[i].owner_id).to eq(hashes[i][:manager_id])
+          expect(players[i].manager_id).to eq(hashes[i][:manager_id])
         end
       end
 

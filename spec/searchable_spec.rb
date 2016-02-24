@@ -40,7 +40,7 @@ describe 'Searchable' do
 
     manager = managers[0]
     expect(manager.fname).to eq('Joe')
-    expect(human.team_id).to eq(2)
+    expect(manager.team_id).to eq(2)
   end
 
   it '#where returns [] if nothing matches the criteria' do

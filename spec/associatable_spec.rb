@@ -129,27 +129,27 @@ describe 'Associatable' do
     end
 
     it 'returns nil if no associated object' do
-      desmond = Cat.find(5)
+      desmond = Player.find(5)
       expect(desmond.manager).to eq(nil)
     end
   end
 
   describe '#has_many' do
-    let(:dusty) { Human.find(3) }
+    let(:dusty) { Manager.find(3) }
     let(:dusty_team) { Team.find(3) }
 
     it 'fetches `players` from `Manager`' do
       expect(dusty).to respond_to(:players)
       players = dusty.players
 
-      expect(players.length).to eq(1)
+      expect(players.length).to eq(2)
 
       expected_player_names = %w(Harper Scherzer)
       2.times do |i|
         player = players[i]
 
         expect(player).to be_instance_of(Player)
-        expect(player.name).to eq(expected_cat_names[i])
+        expect(player.name).to eq(expected_player_names[i])
       end
     end
 
@@ -158,7 +158,7 @@ describe 'Associatable' do
       managers = dusty_team.managers
 
       expect(managers.length).to eq(1)
-      expect(managers[0]).to be_instance_of(Managers)
+      expect(managers[0]).to be_instance_of(Manager)
       expect(managers[0].fname).to eq('Dusty')
     end
 
@@ -177,44 +177,44 @@ describe 'Associatable' do
     end
 
     it 'stores `belongs_to` options' do
-      cat_assoc_options = Cat.assoc_options
-      human_options = cat_assoc_options[:human]
+      player_assoc_options = Player.assoc_options
+      manager_options = player_assoc_options[:manager]
 
-      expect(human_options).to be_instance_of(BelongsToOptions)
-      expect(human_options.foreign_key).to eq(:owner_id)
-      expect(human_options.class_name).to eq('Human')
-      expect(human_options.primary_key).to eq(:id)
+      expect(manager_options).to be_instance_of(BelongsToOptions)
+      expect(manager_options.foreign_key).to eq(:manager_id)
+      expect(manager_options.class_name).to eq('Manager')
+      expect(manager_options.primary_key).to eq(:id)
     end
 
     it 'stores options separately for each class' do
-      expect(Cat.assoc_options).to have_key(:human)
-      expect(Human.assoc_options).to_not have_key(:human)
+      expect(Player.assoc_options).to have_key(:manager)
+      expect(Manager.assoc_options).to_not have_key(:manager)
 
-      expect(Human.assoc_options).to have_key(:house)
-      expect(Cat.assoc_options).to_not have_key(:house)
+      expect(Manager.assoc_options).to have_key(:team)
+      expect(Player.assoc_options).to_not have_key(:team)
     end
   end
 
   describe '#has_one_through' do
     before(:all) do
-      class Cat
-        has_one_through :home, :human, :house
+      class Player
+        has_one_through :home, :manager, :team
 
         self.finalize!
       end
     end
 
-    let(:cat) { Cat.find(1) }
+    let(:player) { Player.find(1) }
 
     it 'adds getter method' do
-      expect(cat).to respond_to(:home)
+      expect(player).to respond_to(:home)
     end
 
-    it 'fetches associated `home` for a `Cat`' do
-      house = cat.home
+    it 'fetches associated `home` for a `Player`' do
+      team = player.home
 
-      expect(house).to be_instance_of(House)
-      expect(house.address).to eq('26th and Guerrero')
+      expect(team).to be_instance_of(Team)
+      expect(team.name).to eq('Mets')
     end
   end
 end
